@@ -1,0 +1,25 @@
+<%- include('header') %>
+
+<% if(req.query.fail!=null) { %>
+    <div class="alert alert-danger">
+        <i class="fas fa-times"></i> <%= req.query.fail %>
+    </div>
+    <script>
+        setTimeout(function(){
+            location = "/";
+        }, 2000);
+    </script>
+<% } %>
+
+<% if(req.query.success!=null) { %>
+    <div class="alert alert-success">
+        <i class="fas fa-info"></i> <%= req.query.success %>
+    </div>
+    <script>
+        setTimeout(function(){
+            location = "/";
+        }, 2000);
+    </script>
+<% } %>
+
+<%- include('footer') %>

@@ -1,0 +1,12 @@
+
+<% if(req.query.fail!=null) { %>
+    <div class="alert alert-danger">
+        <i class="fas fa-times"></i> <%= req.query.fail %>
+    </div>
+<% } %>
+
+<% if(req.query.success!=null) { %>
+    <div class="alert alert-success">
+        <i class="fas fa-info"></i> <%= req.query.success %>
+    </div>
+<% } %>

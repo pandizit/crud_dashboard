@@ -1,0 +1,67 @@
+<%- include('header') %>
+
+    <% if(req.session.type=='admin') { %>
+
+        <h1><i class="fas fa-table"></i> Table Users</h1>
+
+        <table class="table table-bordered table-striped small table-sm">
+            <thead>
+                <tr>
+                    <th>Urut</th>
+                    <th>Userid</th>
+                    <th>Username</th>
+                    <th>Tipe</th>
+                    <th>Opsi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% var urut=1; req.data.forEach(element => { %>
+                <tr>
+                    <td><%= urut %></td>
+                    <td><%= element.userid %></td>
+                    <td><%= element.username %></td>
+                    <td><%= element.type %></td>
+                    <td><a class="btn btn-outline-secondary btn-sm" href="/edit/<%= element.userid %>"><i class="fas fa-edit"></i></a> <button onclick="hapus('<%= element.userid %>')" class="btn btn-outline-secondary btn-sm"><i class="fas fa-times"></i></button></td>
+                </tr>
+                <% urut++; }) %>
+            </tbody>
+        </table>
+        <script>
+            function hapus(userid){
+                $("#userid").val(userid);
+                $("#mod").modal("show");
+            }
+        </script>
+
+        <div id="mod" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <input type="hidden" id="userid" />
+                    <div class="modal-header">
+                        <h5 class="modal-title">Konfirmasi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Apakah anda yakin ingin menghapus User ini?</p>
+                        <button id="btnsubmit" class="btn btn-danger">Ya</button>
+                        <script>
+                            $("#btnsubmit").click(function(){
+                                $.post("/del", {userid: $("#userid").val()}).done(function(){
+                                    location.reload();
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <% } else { %>
+
+        <div class="border rounded p-3">
+            Username: <h2><b><%= req.session.username %></b></h2>
+        </div>
+
+    <% } %>
+
+<%- include('footer') %>

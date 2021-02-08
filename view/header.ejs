@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+        <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <script src="/jquery/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="/fortawesome/css/all.min.css" />
+
+        <title><%= req.title %></title>
+    </head>
+    <body <% if(req.path=='/login') { %> class="bg-dark" <% } %> >
+        <div class="container my-2">
+
+            <% if(req.session.userid!=null) { %>
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="/"><i class="fas fa-users"></i> Users Management</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <div class="navbar-nav m-auto"></div>
+                            <ul class="navbar-nav mr-0 mb-2 mb-lg-0">
+                                <% if(req.session.type=='admin') { %>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="/add"><i class="fas fa-plus"></i> Add</a>
+                                </li>
+                                <% } %>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user"></i> <%= req.session.username %>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <% if(req.session.type=='admin') { %>
+                                            <li><a class="dropdown-item" href="/edit">Profile</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                        <% } %>
+                                        <li><a class="dropdown-item" href="/out">Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <br><br>
+
+            <% } %>

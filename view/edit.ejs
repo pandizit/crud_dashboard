@@ -1,0 +1,20 @@
+<%- include('header') %>
+
+<h1>Edit User</h1>
+
+<%- include('message2'); %>
+
+<form method="post" action="/edit">
+    <input type="hidden" name="userid" value="<%= req.user.userid %>" />
+    <div class="mb-3">
+        <label>Username</label>
+        <input type="text" name="username" class="form-control" value="<%= req.user.username %>" required />
+    </div>
+    <div class="mb-3">
+        <label>Password</label>
+        <input type="password" name="password" class="form-control" required />
+    </div>
+    <button class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+</form>
+
+<%- include('footer') %>
